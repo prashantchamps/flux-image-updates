@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: aks-helloworld
-        image: sasaksacrtest.azurecr.io/sas-test-app:1.0.0 # {"$imagepolicy": "flux-system:helloworld"}
+        image: sasaksacrtest.azurecr.io/sas-test-app:1.0.0 # {"$imagepolicy": "flux-system:sas-test-app"}
         ports:
         - name: http
           containerPort: 3000
