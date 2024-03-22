@@ -7,7 +7,7 @@ spec:
   interval: 2m
   sourceRef:
     kind: GitRepository
-    name: sas-test-app
+    name: flux-system
   git:
     checkout:
       ref:
