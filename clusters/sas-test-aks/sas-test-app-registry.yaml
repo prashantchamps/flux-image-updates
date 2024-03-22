@@ -4,5 +4,7 @@ metadata:
   name: sas-test-app
   namespace: flux-system
 spec:
+  secretRef:
+    name: my-secret
   image: sasaksacrtest.azurecr.io/sas-test-app
   interval: 1m
