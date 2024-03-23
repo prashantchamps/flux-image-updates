@@ -1,9 +1,12 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aks-helloworld
   namespace: default
 spec:
+  nodeSelector:
+    type: user-node
   replicas: 1
   selector:
     matchLabels:
@@ -19,3 +22,45 @@ spec:
         ports:
         - name: http
           containerPort: 3000
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-helloworld
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  type: LoadBalancer
+  selector:
+    app: aks-helloworld
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: aks-helloworld-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: aks-helloworld
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+---
