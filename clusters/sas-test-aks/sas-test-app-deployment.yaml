@@ -49,6 +49,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: aks-helloworld-hpa
+  namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
