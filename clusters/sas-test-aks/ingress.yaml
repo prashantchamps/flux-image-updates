@@ -3,17 +3,17 @@ kind: Ingress
 metadata:
   name: echoserver-v2-secure
   namespace: default
-  annotation:
-    nginx.ingress.kubernetes.io/rewrite-targer: /$1
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-targer: /
 spec:
   ingressClassName: external-nginx
   rules:
-    - http:
-        paths:
-          - path: /
-            pathType: Exact
-            backend:
-              service:
-                name: aks-helloworld
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: aks-helloworld
+            port:
+              number: 80
