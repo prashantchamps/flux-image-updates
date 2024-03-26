@@ -4,7 +4,7 @@ metadata:
   name: echoserver-v2-secure
   namespace: default
   annotation:
-    nginx.ingress.kubernetes.io/rewrite-targer: /$2
+    nginx.ingress.kubernetes.io/rewrite-targer: /$1
 spec:
   ingressClassName: external-nginx
   rules:
